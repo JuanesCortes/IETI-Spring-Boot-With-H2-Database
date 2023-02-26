@@ -24,9 +24,9 @@ public class UsersController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody UserDto user) {
         URI createdUserUri = URI.create("");
-        usersService.save(user);
+        usersService.save(new User(user));
         return ResponseEntity.created(createdUserUri).body(null);
     }
 
