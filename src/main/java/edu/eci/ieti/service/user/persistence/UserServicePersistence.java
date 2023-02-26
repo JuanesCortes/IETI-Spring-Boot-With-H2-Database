@@ -9,7 +9,7 @@ import java.util.List;
 
 @Component
 public class UserServicePersistence {
-    private static HashMap<String, User> users;
+    private static HashMap<String, User> users = new HashMap<String,User>();
 
     public void save(User user) {
         users.put(user.getId(),user);

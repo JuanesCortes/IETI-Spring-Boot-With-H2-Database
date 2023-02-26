@@ -1,8 +1,7 @@
 package edu.eci.ieti.repository.user;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 import java.util.Date;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class User {
 
@@ -18,9 +17,19 @@ public class User {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.passwordHash = password; //new BCryptPasswordEncoder().encode(password);
+        this.passwordHash = new BCryptPasswordEncoder().encode(password);
         this.createdAt = new Date();
     }
+
+    public User(UserDto userDto) {
+        this.id = null;
+        this.name = userDto.getName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
+        this.createdAt = new Date();
+    }
+
 
     public String getId() {
         return id;
@@ -58,12 +67,12 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
-    public void update() {
-//        this.name = userDto.getName();
-//        this.lastName = userDto.getLastName();
-//        this.email = userDto.getEmail();
-//        if (!userDto.getPassword().isEmpty()) {
-//            this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
-//        }
+    public void update(UserDto userDto) {
+        this.name = userDto.getName();
+        this.lastName = userDto.getLastName();
+        this.email = userDto.getEmail();
+        if (!userDto.getPassword().isEmpty()) {
+            this.passwordHash = new BCryptPasswordEncoder().encode(userDto.getPassword());
+        }
     }
 }
